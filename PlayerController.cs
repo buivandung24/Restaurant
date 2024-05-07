@@ -8,8 +8,9 @@ public class PlayerController : MonoBehaviour
 {
     private Animator ani;
     public Joystick joystick;
-    public float speed;
+    public float speed = 3;
     Rigidbody2D rb;
+    public GameObject menuPlayer;
     
     void Start()
     {
@@ -19,6 +20,7 @@ public class PlayerController : MonoBehaviour
 
     void Update()
     {
+        speed = menuPlayer.GetComponent<MenuPlayer>().currentSpeed;
         if(joystick.joystickVec.y != 0){
             rb.velocity = new Vector2(joystick.joystickVec.x * speed, joystick.joystickVec.y * speed);
             ani.SetFloat("LastHorizontal", joystick.joystickVec.x);
