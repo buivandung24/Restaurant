@@ -8,6 +8,7 @@ public class PlayerController : MonoBehaviour
 {
     private Animator ani;
     public Joystick joystick;
+    public GameObject money;
     public float speed = 3;
     Rigidbody2D rb;
     public GameObject menuPlayer;
@@ -30,5 +31,12 @@ public class PlayerController : MonoBehaviour
         }
         ani.SetFloat("Horizontal", joystick.joystickVec.x);
         ani.SetFloat("Vertical", joystick.joystickVec.y);
+    }
+
+    private void OnTriggerEnter2D(Collider2D other) {
+        if(other.gameObject.CompareTag("Money")){
+            Destroy(other.gameObject);
+            money.GetComponent<Money>().currentMoney += (10 * menuPlayer.GetComponent<MenuPlayer>().currentProfitsUp);
+        }
     }
 }

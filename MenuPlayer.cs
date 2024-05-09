@@ -24,8 +24,10 @@ public class MenuPlayer : MonoBehaviour
     public GameObject joystick;
     [Header("------Current-------")]
     public float currentSpeed;
-    public float currentCapacity;
+    public int currentCapacity;
     public float currentProfitsUp;
+    [Header("------Money-------")]
+    public GameObject money;
     
     void Start()
     {
@@ -52,36 +54,44 @@ public class MenuPlayer : MonoBehaviour
 
 
     public void UpgradeSpeed(){
-        currentLvSpeed++;
-        currentSpeed = dataPlayer.speeds[currentLvSpeed].speed;
-        levelSpeedText.text = "Level: " + dataPlayer.speeds[currentLvSpeed].lv;
-        costSpeedText.text = "Upgrade Cost: " + dataPlayer.speeds[currentLvSpeed].cost;
-        if(dataPlayer.speeds[currentLvSpeed].cost == 0){
-            levelSpeedText.text = "Level: MAX";
-            costSpeedText.text = "MAX";
+        if(money.GetComponent<Money>().currentMoney > dataPlayer.speeds[currentLvSpeed].cost){
+            money.GetComponent<Money>().currentMoney -= dataPlayer.speeds[currentLvSpeed].cost;
+            currentLvSpeed++;
+            currentSpeed = dataPlayer.speeds[currentLvSpeed].speed;
+            levelSpeedText.text = "Level: " + dataPlayer.speeds[currentLvSpeed].lv;
+            costSpeedText.text = "Upgrade Cost: " + dataPlayer.speeds[currentLvSpeed].cost;
+            if(dataPlayer.speeds[currentLvSpeed].cost == 0){
+                levelSpeedText.text = "Level: MAX";
+                costSpeedText.text = "MAX";
+            }
         }
-        
     }
 
     public void UpgradeCapacity(){
-        currentLvCapacity++;
-        currentCapacity = dataPlayer.capacititys[currentLvCapacity].capacity;
-        levelCapacityText.text = "Level: " + dataPlayer.capacititys[currentLvCapacity].lv;
-        costCapacityText.text = "Upgrade Cost: " + dataPlayer.capacititys[currentLvCapacity].cost;
-        if(dataPlayer.capacititys[currentLvCapacity].cost == 0){
-            levelCapacityText.text = "Level: MAX";
-            costCapacityText.text = "MAX";
+        if(money.GetComponent<Money>().currentMoney > dataPlayer.capacititys[currentLvCapacity].cost){
+            money.GetComponent<Money>().currentMoney -= dataPlayer.capacititys[currentLvCapacity].cost;
+            currentLvCapacity++;
+            currentCapacity = dataPlayer.capacititys[currentLvCapacity].capacity;
+            levelCapacityText.text = "Level: " + dataPlayer.capacititys[currentLvCapacity].lv;
+            costCapacityText.text = "Upgrade Cost: " + dataPlayer.capacititys[currentLvCapacity].cost;
+            if(dataPlayer.capacititys[currentLvCapacity].cost == 0){
+                levelCapacityText.text = "Level: MAX";
+                costCapacityText.text = "MAX";
+            }
         }
     }
 
     public void UpgradeProfitsUp(){
-        currentLvProfitsUp++;
-        currentProfitsUp = dataPlayer.profitsUps[currentLvProfitsUp].profitsUp;
-        levelProfitsUpText.text = "Level: " + dataPlayer.profitsUps[currentLvProfitsUp].lv;
-        costProfitsUpText.text = "Upgrade Cost: " + dataPlayer.profitsUps[currentLvProfitsUp].cost;
-        if(dataPlayer.profitsUps[currentLvProfitsUp].cost == 0){
-            levelProfitsUpText.text = "Level: MAX";
-            costProfitsUpText.text = "MAX";
+        if(money.GetComponent<Money>().currentMoney > dataPlayer.profitsUps[currentLvProfitsUp].cost){
+            money.GetComponent<Money>().currentMoney -= dataPlayer.profitsUps[currentLvProfitsUp].cost;
+            currentLvProfitsUp++;
+            currentProfitsUp = dataPlayer.profitsUps[currentLvProfitsUp].profitsUp;
+            levelProfitsUpText.text = "Level: " + dataPlayer.profitsUps[currentLvProfitsUp].lv;
+            costProfitsUpText.text = "Upgrade Cost: " + dataPlayer.profitsUps[currentLvProfitsUp].cost;
+            if(dataPlayer.profitsUps[currentLvProfitsUp].cost == 0){
+                levelProfitsUpText.text = "Level: MAX";
+                costProfitsUpText.text = "MAX";
+            }
         }
     }
 
