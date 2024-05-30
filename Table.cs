@@ -7,6 +7,7 @@ public class Table : MonoBehaviour
     public bool canSit = false;
     private bool checkTable = true;
     public GameObject table;
+    public bool isFacingRight;
     void Start() {
         canSit = false;
     }

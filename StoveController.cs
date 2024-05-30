@@ -56,6 +56,12 @@ public class StoveController : MonoBehaviour
         }
         ActiveStove();
         turnOnCooking2();
+
+        icon.SetActive(!imageFood1.gameObject.activeSelf);
+        if(turnOnIcon2 == 0){
+            icon2.SetActive(!imageFood2.gameObject.activeSelf);
+        }
+        
     }
 
     public void ExitButton(){

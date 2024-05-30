@@ -6,7 +6,7 @@ public class TableController : MonoBehaviour
 {
     public GameObject[] chair;
     public GameObject table;
-
+    public bool isFacingRight;
     public GameObject chairCanSit;
     void Start() {
         chairCanSit = null;
@@ -18,6 +18,7 @@ public class TableController : MonoBehaviour
                 chairCanSit = chair[i];
                 table = chair[i].GetComponent<Table>().table;
                 chair[i].GetComponent<Table>().canSit = false;
+                isFacingRight = chair[i].GetComponent<Table>().isFacingRight;
                 break;
             }
         }

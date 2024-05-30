@@ -18,6 +18,7 @@ public class CustomerController : MonoBehaviour
     private GameObject chairObject;
     private GameObject table;
     private bool isCheckChairCanSit = true;
+    private Animator ani;
 
     void Start()
     {
@@ -25,6 +26,7 @@ public class CustomerController : MonoBehaviour
         player = GameObject.FindWithTag("Player");
         chair = GameObject.FindWithTag("Table");
         moneyArea = GameObject.FindWithTag("Money Area");
+        ani = GetComponent<Animator>();
     }
 
     // Update is called once per frame
@@ -36,6 +38,7 @@ public class CustomerController : MonoBehaviour
     private void OrderFood(){
         imageOrderFood.sprite = imageFood[Random.Range(0, imageFood.Length)].sprite;
     }
+
     public void IsCorrectFood(){
         for(int i = 0; i<3; i++){
             moneyArea.GetComponent<MoneyArea>().createMoney();
@@ -51,12 +54,17 @@ public class CustomerController : MonoBehaviour
         if(hasFood){
             findTheChair();
             if(!isCheckChairCanSit){
+                ani.SetFloat("Horizontal", 1);
                 Vector3 moveVector = chairObject.transform.position - gameObject.transform.position;
                 gameObject.transform.Translate(moveVector * speed * Time.deltaTime);
                 float distance = Vector3.Distance(gameObject.transform.position, chairObject.transform.position);
                 if (distance < 0.5)
                 {
                     gameObject.transform.Translate(Vector3.zero);
+                    if(!chair.GetComponent<TableController>().isFacingRight){
+                        ani.SetTrigger("SitChair");
+                        ani.SetFloat("Horizontal", -1);
+                    }
                     hasFood = false;
                     StartCoroutine(eat());
                 }

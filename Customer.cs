@@ -11,11 +11,13 @@ public class Customer : MonoBehaviour
     public GameObject[] queuePosition;
     public GameObject[] customer;
     public GameObject[] customerInScene = new GameObject[10];
+    private GameObject counter;
     private bool isChange = false;
     private int speed = 3;
 
     void Start()
     {
+        counter = GameObject.FindWithTag("Counter");
         for(int i = 0; i < queueNumber; i++){
             int randomCustomer = Random.Range(0, 3);
             queuePosition[i].transform.position = new Vector3(queueObject.transform.position.x + (1.5f * i), queueObject.transform.position.y + 0.25f, -0.1f);
@@ -23,9 +25,11 @@ public class Customer : MonoBehaviour
         }
     }
 
-    
     void Update()
     {
+        if(counter.gameObject.activeSelf){
+            
+        }
         checkCustomer();
     }
 
