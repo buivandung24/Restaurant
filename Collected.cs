@@ -14,11 +14,6 @@ public class Collected : MonoBehaviour
     public int capacity;
     public int currentNumberOfFood = 0;
     public Image imageNone;
-    
-    void Start()
-    {
-        
-    }
 
     void Update()
     {
